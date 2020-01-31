@@ -1,7 +1,7 @@
 { 
     "name": "Aster-app",
     "engines": {
-        "node": "8.17.0",
+        "node": "13.7.0",
         "yarn": "1.21.1"
     },
     "scripts": {
