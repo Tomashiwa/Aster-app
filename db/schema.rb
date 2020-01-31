@@ -43,7 +43,7 @@ ActiveRecord::Schema.define(version: 2020_01_31_035522) do
 
   create_table "tags", force: :cascade do |t|
     t.string "name"
-    t.bigint "user_id", null: false
+    t.bigint "user_id", null: true
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id"], name: "index_tags_on_user_id"
@@ -54,7 +54,7 @@ ActiveRecord::Schema.define(version: 2020_01_31_035522) do
     t.string "title"
     t.text "description"
     t.bigint "tag_id", null: false
-    t.datetime "dueDate"
+    t.datetime "due_date"
     t.integer "participants"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

@@ -5,7 +5,7 @@ one:
   title: MyString
   description: MyText
   tag: one
-  dueDate: 2020-01-31 11:53:59
+  due_date: 2020-01-31 11:53:59
   participants: 1
 
 two:
@@ -13,5 +13,5 @@ two:
   title: MyString
   description: MyText
   tag: two
-  dueDate: 2020-01-31 11:53:59
+  due_date: 2020-01-31 11:53:59
   participants: 1
