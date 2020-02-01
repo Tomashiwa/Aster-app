@@ -1,0 +1,46 @@
+.userDate {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-content: center;
+}
+
+#title {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-content: center;
+}
+
+#title > #titleText {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#commentBox {
+    background-image: linear-gradient(0deg, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0.3) 100%);    
+}
+
+.comment {
+    display: flex;
+    flex-direction: column;
+}
+
+.comment .saveCancelButtons {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    margin-top: 5px;
+}
+
+#input {
+    max-width: 700px;
+}
+
+#input > #submitButton {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    margin-top: 5px;
+}

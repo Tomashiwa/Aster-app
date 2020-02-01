@@ -1,0 +1,29 @@
+#addEdit_content {
+    display: flex;
+    flex-direction: column;
+    background-image: linear-gradient(0deg, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0.3) 100%);
+    padding: 5px;
+}
+
+#addEdit_content > #addEdit_dateTags {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#addEdit_dateTags > #addEdit_tags_new {
+    display: flex;
+    flex-direction: column;
+}
+
+#addEdit_tags_new > #addEdit_tags_newBox {
+    display: flex;
+    flex-direction: row;
+}
+
+#addEdit_dateTags > #addEdit_tags_choosing {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}

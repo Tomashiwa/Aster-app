@@ -1,0 +1,12 @@
+.buttonArea {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    /* align-content: space-around; */
+    /* align-items: center; */
+    /* background-color: tomato; */
+}
+
+.buttonArea > Button {
+    /* background: violet; */
+}

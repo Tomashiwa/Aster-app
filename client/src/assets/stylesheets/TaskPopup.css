@@ -1,0 +1,72 @@
+#popup {
+    display: flex;
+    align-content: space-around;
+    justify-content: space-around;
+}
+
+#titleDate {
+    display: flex;
+    flex-direction: column;
+}
+
+#titleDateTagsBox {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 5px;
+    background-image: linear-gradient(0deg, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0.3) 100%);
+}
+
+#popup #description {
+    padding: 5px;
+    background-image: linear-gradient(0deg, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0.3) 100%);
+}
+
+#popup #description_text { 
+    text-align: justify;
+    margin-top: 12px;
+    margin-left: 6px;
+    margin-right: 6px;
+}
+
+#popup #comments_tags_participants {
+    display: flex;
+    flex: 1;
+    flex-direction: row;
+}
+
+#comments_tags_participants #comments {
+    flex-grow: 1;
+}
+
+#comments_tags_participants #tags_participants {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: stretch;
+    align-content: space-between;
+    flex-grow: 0;
+    padding: 5px;
+    max-width: 160px;
+}
+
+#tags_participants > #tags {
+    flex-grow: 0;
+    background-image: linear-gradient(0deg, rgba(255,255,255,0.3) 0%, rgba(255,255,255,1) 100%);
+}
+
+#tags_participants > #participants {
+    flex-grow: 0;
+}
+
+#tags_participants > #confirmClose {
+    flex-grow: 1;
+    margin-top: 20px;
+}
+
+#confirmClose {
+    display: flex;
+    flex-direction: column;
+    justify-content: stretch;
+}

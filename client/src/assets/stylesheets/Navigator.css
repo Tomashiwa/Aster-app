@@ -1,0 +1,17 @@
+#navBar {
+    background-image: linear-gradient(to bottom right, rgb(235, 144, 159), mistyRose);
+    display: flex;
+}
+
+#searchFilter {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-left: auto;
+}
+
+#searchBar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}

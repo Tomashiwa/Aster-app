@@ -1,0 +1,16 @@
+#index {
+    background-image: linear-gradient(180deg, rgba(226,163,173,1) 0%, rgba(255,228,225,1) 100%);
+}
+
+#indexTitle {
+    color: white;
+}
+
+.taskItem {
+    background-image: linear-gradient(0deg, rgba(255,255,255,0.5) 0%, rgba(255,255,255,0.5) 100%);
+}
+
+#addTask_Item {
+    display: flex;
+    justify-content: center;
+}
