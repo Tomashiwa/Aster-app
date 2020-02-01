@@ -36,7 +36,7 @@ Knock.setup do |config|
   ## Configure the key used to sign tokens.
   ##
   ## Default:
-  # puts "CREDENTIALS:"
+  puts "CREDENTIALS:"
   # puts Rails.application.credentials.fetch(:secret_key_base)
   config.token_secret_signature_key = -> { Rails.application.credentials.fetch(:secret_key_base) }
 
