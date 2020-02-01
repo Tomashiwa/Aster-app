@@ -1,4 +1,4 @@
-class CreateBoards < ActiveRecord::Migration[6.0]
+class CreateBoards < ActiveRecord::Migration[5.2]
   def change
     create_table :boards do |t|
       t.references :user, null: true, foreign_key: true

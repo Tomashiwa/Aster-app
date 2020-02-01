@@ -1,4 +1,4 @@
-class CreateTasks < ActiveRecord::Migration[6.0]
+class CreateTasks < ActiveRecord::Migration[5.2]
   def change
     create_table :tasks do |t|
       t.references :list, null: true, foreign_key: true
