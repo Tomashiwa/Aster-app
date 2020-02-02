@@ -2,6 +2,7 @@ import React from "react";
 import { IconButton, ListItemText, Typography, withStyles } from "@material-ui/core";
 import { List, ListItem, ListItemSecondaryAction, Box} from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
+import { shadows } from '@material-ui/system';
 
 import AddIcon from '@material-ui/icons/Add';
 import EditIcon from '@material-ui/icons/Edit';
@@ -13,7 +14,6 @@ import AddEditPopup from "./AddEditPopup";
 import TaskPopup from "./TaskPopup";
 
 import "../../assets/stylesheets/TaskIndex.css"
-// import "./styles/TaskIndex.css"
 
 const styles = {
   editDelete: {
@@ -302,7 +302,7 @@ class TaskIndex extends React.Component {
     });
 
     return (
-      <Box id="index" border={1} borderColor="white" borderRadius={16}>
+      <Box id="index" border={0} borderColor="grey.500" borderRadius={16} boxShadow={5}>
           <br/>
           <Typography id="indexTitle" align="center" variant="h6">{this.props.list.name}</Typography>
           <br/>
