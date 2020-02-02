@@ -12,6 +12,7 @@ import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import AddEditPopup from "./AddEditPopup";
 import TaskPopup from "./TaskPopup";
 
+import "../../assets/stylesheets/TaskIndex.css"
 // import "./styles/TaskIndex.css"
 
 const styles = {

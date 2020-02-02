@@ -2,6 +2,7 @@ import React from 'react';
 
 import RegisterLoginPopup from "./javascript/components/RegisterLoginPopup";
 import Navigator from "./javascript/components/Navigator";
+import Board from "./javascript/components/Board"
 
 // import logo from './assets/images/logo.png';
 // import pinkVectorBG from './assets/images/pinkVectorBG.svg'
@@ -31,11 +32,12 @@ class App extends React.Component {
     localStorage.removeItem("jwt");
 
     if(localStorage.getItem("jwt") !== null) {
-      this.fetchUsers(localStorage.getItem("name"));
-      this.fetchBoards();
-      this.fetchLists();
-      this.fetchTasks();
-      this.fetchTags();
+      this.fetchAll(localStorage.getItem("name"));
+      // this.fetchUsers(localStorage.getItem("name"));
+      // this.fetchBoards();
+      // this.fetchLists();
+      // this.fetchTasks();
+      // this.fetchTags();
     }
   }
 
@@ -67,11 +69,7 @@ class App extends React.Component {
         if(result !== null) {
           localStorage.setItem("name", givenName);
           localStorage.setItem("jwt", result.jwt);
-          this.fetchUsers(givenName);
-          this.fetchBoards();
-          this.fetchLists();
-          this.fetchTags();
-          this.fetchTasks();
+          this.fetchAll(givenName);
           callback();
         } else {
           this.setState({errorMsg: "Invalid username or password."});
@@ -122,7 +120,15 @@ class App extends React.Component {
     })
   }
 
-  fetchUsers = (name) => {
+  fetchAll = async(name) => {
+    this.fetchUsers(name, 
+      () => this.fetchBoards(
+        () =>this.fetchLists(
+          () =>this.fetchTags(
+            () =>this.fetchTasks()))));
+  }
+
+  fetchUsers = (name, callback) => {
     let bearer = "Bearer " + localStorage.getItem("jwt");
 
     fetch("/api/users", {
@@ -138,11 +144,11 @@ class App extends React.Component {
       return response.json();
     })
     .then(result => {
-      this.setState({users: result, user: result.filter(user => user.name === name)[0]});
+      this.setState({users: result, user: result.filter(user => user.name === name)[0]}, callback);
     })
   }
 
-  fetchBoards = () => {
+  fetchBoards = (callback) => {
     let bearer = "Bearer " + localStorage.getItem("jwt");
 
     fetch("/api/boards", {
@@ -161,11 +167,11 @@ class App extends React.Component {
       this.setState({
         boards: result,
         board: result.filter(board => board.user_id === this.state.user.id)[0]
-      });
+      }, callback);
     })
   }
 
-  fetchLists = () => {
+  fetchLists = (callback) => {
     let bearer = "Bearer " + localStorage.getItem("jwt");
 
     fetch("/api/lists", {
@@ -181,11 +187,11 @@ class App extends React.Component {
       return response.json();
     })
     .then(result => {
-      this.setState({lists: result});
+      this.setState({lists: result}, callback);
     })
   }
 
-  fetchTags = () => {
+  fetchTags = (callback) => {
     let bearer = "Bearer " + localStorage.getItem("jwt");
 
     fetch("/api/tags", {
@@ -201,7 +207,7 @@ class App extends React.Component {
       return response.json();
     })
     .then(result => {
-      this.setState({tags: result});
+      this.setState({tags: result}, callback);
     })
   }
   
@@ -247,7 +253,7 @@ class App extends React.Component {
 
             <br />
 
-            {/* {
+            {
               this.state.users && this.state.lists && this.state.tags && this.state.tags
                 ? <Board 
                     id={this.state.board.id} 
@@ -261,7 +267,7 @@ class App extends React.Component {
                     onUpdateTags={this.fetchTags}
                     fetchTasks={this.fetchTasks} /> 
                 : null
-            } */}
+            }
             
             <RegisterLoginPopup 
               isOpened={localStorage.getItem("jwt") === null}

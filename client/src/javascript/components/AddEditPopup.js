@@ -9,7 +9,7 @@ import CloseIcon from '@material-ui/icons/Close';
 
 import TagSelect from "./TagSelect";
 
-import "./styles/AddEditPopup.css"
+import '../../assets/stylesheets/AddEditPopup.css'
 
 class AddEditPopup extends React.Component {
     constructor(props) {

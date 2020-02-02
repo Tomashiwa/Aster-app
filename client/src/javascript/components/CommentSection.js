@@ -6,7 +6,8 @@ import UserInfo from "./UserInfo";
 import CreateIcon from '@material-ui/icons/Create';
 import DeleteIcon from '@material-ui/icons/Delete';
 
-import "./styles/CommentSection.css"
+import "../../assets/stylesheets/CommentSection.css"
+// import "./styles/CommentSection.css"
 
 const styles = {
     editDelete: {

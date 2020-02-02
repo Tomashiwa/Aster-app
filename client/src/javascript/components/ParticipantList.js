@@ -7,7 +7,8 @@ import CloseIcon from '@material-ui/icons/Close';
 
 import UserInfo from "./UserInfo";
 
-import "./styles/ParticipantList.css"
+import "../../assets/stylesheets/ParticipantList.css"
+// import "./styles/ParticipantList.css"
 
 class ParticipantList extends React.Component {
     constructor(props) {

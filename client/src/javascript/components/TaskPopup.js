@@ -5,7 +5,8 @@ import TagSelect from "./TagSelect";
 import ParticipantList from "./ParticipantList";
 import CommentSection from "./CommentSection";
 
-import "./styles/TaskPopup.css"
+import "../../assets/stylesheets/TaskPopup.css"
+// import "./styles/TaskPopup.css"
 
 class TaskPopup extends React.Component {
     constructor(props) {
