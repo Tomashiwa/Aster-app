@@ -4,10 +4,10 @@ import RegisterLoginPopup from "./javascript/components/RegisterLoginPopup";
 import Navigator from "./javascript/components/Navigator";
 import Board from "./javascript/components/Board"
 
-// import logo from './assets/images/logo.png';
+import logo from './assets/images/logo.png';
 // import pinkVectorBG from './assets/images/pinkVectorBG.svg'
 
-// import './assets/stylesheets/App.css'
+import './assets/stylesheets/App.css'
 // import "./assets/stylesheets/App.css.erb"
 // import './assets/stylesheets/A'
 
@@ -33,11 +33,6 @@ class App extends React.Component {
 
     if(localStorage.getItem("jwt") !== null) {
       this.fetchAll(localStorage.getItem("name"));
-      // this.fetchUsers(localStorage.getItem("name"));
-      // this.fetchBoards();
-      // this.fetchLists();
-      // this.fetchTasks();
-      // this.fetchTags();
     }
   }
 
@@ -231,43 +226,46 @@ class App extends React.Component {
     })
   }
 
-
   render() {
     return (
       //<div style={{backgroundImage: 'url('+pinkVectorBG+')'}}>
       this.state
         ? <div className="App"> 
-            {/* <img src={logo} alt="logo" /> */}
+            <img className="Logo" src={logo} alt="logo" width="250" height="90" />
 
-            {
-              this.state.users && this.state.tags
-                ? <Navigator 
-                    tags={this.state.tags} 
-                    user={this.state.user} 
-                    filterTagId={this.state.filterTagId} 
-                    onLogout={this.onLogout} 
-                    onFilter={this.onFilter} 
-                    onSearch={this.onSearch} />
-                : null              
-            }
+            <div className="Navigator">
+              {
+                this.state.users && this.state.tags
+                  ? <Navigator 
+                      tags={this.state.tags} 
+                      user={this.state.user} 
+                      filterTagId={this.state.filterTagId} 
+                      onLogout={this.onLogout} 
+                      onFilter={this.onFilter} 
+                      onSearch={this.onSearch} />
+                  : null              
+              }
+            </div>
 
             <br />
 
-            {
-              this.state.users && this.state.lists && this.state.tags && this.state.tags
-                ? <Board 
-                    id={this.state.board.id} 
-                    tasks={this.state.tasks} 
-                    lists={this.state.lists} 
-                    user={this.state.user} 
-                    users={this.state.users} 
-                    tags={this.state.tags} 
-                    filterTagId={this.state.filterTagId} 
-                    filterSearchTerm={this.state.filterSearchTerm}
-                    onUpdateTags={this.fetchTags}
-                    fetchTasks={this.fetchTasks} /> 
-                : null
-            }
+            <div className="Board">
+              {
+                this.state.users && this.state.lists && this.state.tags && this.state.tags
+                  ? <Board 
+                      id={this.state.board.id} 
+                      tasks={this.state.tasks} 
+                      lists={this.state.lists} 
+                      user={this.state.user} 
+                      users={this.state.users} 
+                      tags={this.state.tags} 
+                      filterTagId={this.state.filterTagId} 
+                      filterSearchTerm={this.state.filterSearchTerm}
+                      onUpdateTags={this.fetchTags}
+                      fetchTasks={this.fetchTasks} /> 
+                  : null
+              }
+            </div>
             
             <RegisterLoginPopup 
               isOpened={localStorage.getItem("jwt") === null}
