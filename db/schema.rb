@@ -34,7 +34,7 @@ ActiveRecord::Schema.define(version: 2020_01_31_035522) do
   end
 
   create_table "lists", force: :cascade do |t|
-    t.bigint "board_id", null: false
+    t.bigint "board_id"
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -43,19 +43,19 @@ ActiveRecord::Schema.define(version: 2020_01_31_035522) do
 
   create_table "tags", force: :cascade do |t|
     t.string "name"
-    t.bigint "user_id", null: true
+    t.bigint "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id"], name: "index_tags_on_user_id"
   end
 
   create_table "tasks", force: :cascade do |t|
-    t.bigint "list_id", null: false
+    t.bigint "list_id"
     t.string "title"
     t.text "description"
-    t.bigint "tag_id", null: false
+    t.bigint "tag_id"
     t.datetime "due_date"
-    t.integer "participants"
+    t.bigint "participants", array: true
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["list_id"], name: "index_tasks_on_list_id"
@@ -65,7 +65,7 @@ ActiveRecord::Schema.define(version: 2020_01_31_035522) do
   create_table "users", force: :cascade do |t|
     t.string "name"
     t.string "password_digest"
-    t.boolean "admin"
+    t.boolean "admin", default: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

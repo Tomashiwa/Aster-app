@@ -2,8 +2,12 @@ import React from 'react';
 
 import RegisterLoginPopup from "./javascript/components/RegisterLoginPopup";
 
-import logo from './assets/images/logo.png';
+// import logo from './assets/images/logo.png';
 // import pinkVectorBG from './assets/images/pinkVectorBG.svg'
+
+// import './assets/stylesheets/App.css'
+// import "./assets/stylesheets/App.css.erb"
+// import './assets/stylesheets/A'
 
 class App extends React.Component {
   constructor(props) {
@@ -27,10 +31,10 @@ class App extends React.Component {
 
     if(localStorage.getItem("jwt") !== null) {
       this.fetchUsers(localStorage.getItem("name"));
-      // this.fetchBoards();
-      // this.fetchLists();
-      // this.fetchTasks();
-      // this.fetchTags();
+      this.fetchBoards();
+      this.fetchLists();
+      this.fetchTasks();
+      this.fetchTags();
     }
   }
 
@@ -48,34 +52,26 @@ class App extends React.Component {
     console.log(request);
 
     const attemptLogin = async() => {
-      // let bearer = "Bearer " + localStorage.getItem("jwt");
-      // const csrfToken = document.querySelector('meta[name="csrf-token"]').content;
-    
       fetch("/api/user_token", {
         method: "POST",
-        // credentials: "include",
         headers: {
             "Content-Type": "application/vnd.api+json",
-            // "X-CSRF-Token": csrfToken
         },  
         body: JSON.stringify(request)
       })
       .then(response => {
-        console.log(response);
-
         return response.status === 201 ? response.json() : null;
       })
       .then(result => {
-        console.log(result);
         if(result !== null) {
           localStorage.setItem("name", givenName);
           localStorage.setItem("jwt", result.jwt);
           this.fetchUsers(givenName);
-          // this.fetchBoards();
-          // this.fetchLists();
-          // this.fetchTags();
-          // this.fetchTasks();
-          // callback();
+          this.fetchBoards();
+          this.fetchLists();
+          this.fetchTags();
+          this.fetchTasks();
+          callback();
         } else {
           this.setState({errorMsg: "Invalid username or password."});
         }
@@ -101,8 +97,6 @@ class App extends React.Component {
   onRegister = (givenName, givenPassword, callback) => {
     fetch("/api/users", {
       method: "POST",
-      // withCredentials: true,
-      // credentials: "include",
       headers: {
         "Content-Type": "application/json"
       },
@@ -165,7 +159,7 @@ class App extends React.Component {
     .then(result => {
       this.setState({
         boards: result,
-        board: result.filter(board => board.user_id == this.state.user.id)[0]
+        board: result.filter(board => board.user_id === this.state.user.id)[0]
       });
     })
   }
@@ -233,9 +227,10 @@ class App extends React.Component {
 
   render() {
     return (
+      //<div style={{backgroundImage: 'url('+pinkVectorBG+')'}}>
       this.state
-        ? <div>
-            <img src={logo} alt="logo" />
+        ? <div className="App"> 
+            {/* <img src={logo} alt="logo" /> */}
 
             {/* {
               this.state.users && this.state.tags
@@ -268,7 +263,7 @@ class App extends React.Component {
             } */}
             
             <RegisterLoginPopup 
-              isOpened={true}//localStorage.getItem("jwt") === null}
+              isOpened={localStorage.getItem("jwt") === null}
               onRegister={this.onRegister}
               onLogin={this.onLogin}
               errorMsg={this.state.errorMsg}
