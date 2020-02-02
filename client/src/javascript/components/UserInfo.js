@@ -3,7 +3,7 @@ import { Typography } from "@material-ui/core";
 
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 
-import "./styles/UserInfo.css"
+import "../../assets/stylesheets/UserInfo.css"
 
 class UserInfo extends React.Component {
     constructor(props) {

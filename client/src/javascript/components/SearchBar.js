@@ -3,7 +3,7 @@ import { IconButton, InputBase } from "@material-ui/core";
 
 import SearchIcon from "@material-ui/icons/Search";
 
-import "./styles/SearchBar.css"
+import "../../assets/stylesheets/SearchBar.css"
 
 class SearchBar extends React.Component {
     constructor(props) {
@@ -12,7 +12,7 @@ class SearchBar extends React.Component {
     }
 
     keyPress(e){
-        if(e.keyCode == 13){
+        if(e.keyCode === 13){
            this.props.onSearch();
         }
     }  

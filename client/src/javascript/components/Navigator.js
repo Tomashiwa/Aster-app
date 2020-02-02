@@ -7,7 +7,7 @@ import SearchBar from "./SearchBar";
 
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 
-import "./styles/Navigator.css"
+import "../../assets/stylesheets/Navigator.css"
 
 class Navigator extends React.Component {
     constructor(props) {

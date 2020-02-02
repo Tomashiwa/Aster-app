@@ -1,6 +1,7 @@
 import React from 'react';
 
 import RegisterLoginPopup from "./javascript/components/RegisterLoginPopup";
+import Navigator from "./javascript/components/Navigator";
 
 // import logo from './assets/images/logo.png';
 // import pinkVectorBG from './assets/images/pinkVectorBG.svg'
@@ -232,7 +233,7 @@ class App extends React.Component {
         ? <div className="App"> 
             {/* <img src={logo} alt="logo" /> */}
 
-            {/* {
+            {
               this.state.users && this.state.tags
                 ? <Navigator 
                     tags={this.state.tags} 
@@ -242,7 +243,7 @@ class App extends React.Component {
                     onFilter={this.onFilter} 
                     onSearch={this.onSearch} />
                 : null              
-            } */}
+            }
 
             <br />
 
