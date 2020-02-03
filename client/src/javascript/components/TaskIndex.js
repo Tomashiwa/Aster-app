@@ -2,7 +2,6 @@ import React from "react";
 import { IconButton, ListItemText, Typography, withStyles } from "@material-ui/core";
 import { List, ListItem, ListItemSecondaryAction, Box} from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import { shadows } from '@material-ui/system';
 
 import AddIcon from '@material-ui/icons/Add';
 import EditIcon from '@material-ui/icons/Edit';

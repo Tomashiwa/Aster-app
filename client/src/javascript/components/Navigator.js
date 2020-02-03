@@ -33,8 +33,10 @@ class Navigator extends React.Component {
                     </IconButton>
 
                     <div id="searchFilter">
-                        {/* <Typography> Filter by </Typography> */}
-                        <TagSelect tags={this.props.tags} tag_id={this.props.filterTagId} onChange={this.props.onFilter} />
+                        <Typography> Filter by </Typography>
+                        <div style={{marginLeft: "10px", marginRight: "15px"}}>
+                            <TagSelect tags={this.props.tags} tag_id={this.props.filterTagId} onChange={this.props.onFilter} />
+                        </div>
                         <SearchBar onTermChange={this.onTermChange} onSearch={() => this.props.onSearch(this.state.searchTerm)} />
                     </div>
                 </Toolbar>
