@@ -1,5 +1,6 @@
 import React from "react";
 import { AppBar, Toolbar, IconButton } from "@material-ui/core";
+import { Typography } from "@material-ui/core";
 
 import UserInfo from "./UserInfo";
 import TagSelect from "./TagSelect";    
@@ -32,6 +33,7 @@ class Navigator extends React.Component {
                     </IconButton>
 
                     <div id="searchFilter">
+                        {/* <Typography> Filter by </Typography> */}
                         <TagSelect tags={this.props.tags} tag_id={this.props.filterTagId} onChange={this.props.onFilter} />
                         <SearchBar onTermChange={this.onTermChange} onSearch={() => this.props.onSearch(this.state.searchTerm)} />
                     </div>

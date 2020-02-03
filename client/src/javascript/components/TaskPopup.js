@@ -84,6 +84,10 @@ class TaskPopup extends React.Component {
     }
 
     render() {
+        console.log("Current user id: " + this.props.user.id);
+        console.log("Task's owner id: " + this.props.selectedTask.participants[0]);
+        // console.log(this.props.selectedTask.participants);
+
         return(
             <Dialog id="popup" fullWidth={true} maxWidth={"md"} open={this.props.isOpened} onClose={this.props.onClose} 
                 PaperProps={{ style: {
@@ -109,7 +113,13 @@ class TaskPopup extends React.Component {
                             </div>
                         </div>
                         <div id="tags">
-                            <TagSelect tags={this.props.tags} tag_id={this.props.newTagId} onChange={this.handleTagChange} />                    
+                            {
+                                
+                                this.props.user.id === this.props.selectedTask.participants[0]
+                                    ? <TagSelect tags={this.props.tags} tag_id={this.props.newTagId} onChange={this.handleTagChange} />                    
+                                    : <div> {this.props.tags[this.props.newTagId - 1].name} </div> 
+                            }
+
                         </div>
                     </Box>
                 </DialogTitle>

@@ -29,7 +29,7 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    localStorage.removeItem("jwt");
+    // localStorage.removeItem("jwt");
 
     if(localStorage.getItem("jwt") !== null) {
       this.fetchAll(localStorage.getItem("name"));
