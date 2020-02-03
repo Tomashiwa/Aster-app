@@ -295,9 +295,12 @@ class TaskIndex extends React.Component {
   render() {
     const { classes } = this.props;
     
+    console.log("Tasks loaded:");
+    console.log(this.props.tasks);
+
     let tasksLoaded = this.props.tasks;    
     tasksLoaded.sort((first, second) => {
-      return first.due_date <= second.due_date ? -1 : 1;
+      return first.due_date < second.due_date ? -1 : 1;
     });
 
     return (
