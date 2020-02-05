@@ -29,7 +29,10 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    // localStorage.removeItem("jwt");
+    if(localStorage.getItem("name") === null || localStorage.getItem("jwt") === null) {
+      localStorage.clear();
+      this.setState({});
+    }
 
     if(localStorage.getItem("jwt") !== null) {
       this.fetchAll(localStorage.getItem("name"));
@@ -76,8 +79,7 @@ class App extends React.Component {
   }
 
   onLogout = () => {    
-    localStorage.removeItem("name");
-    localStorage.removeItem("jwt");
+    localStorage.clear();
     this.setState({
       users: [],
       boards: [],
@@ -156,13 +158,21 @@ class App extends React.Component {
       }
     })
     .then(async(response) => {
-        return response.json();
+      if(response.status == 401) {
+        localStorage.clear();
+        this.setState({});
+        return;
+      }
+      
+      return response.json();
     })
     .then(result => {
-      this.setState({
-        boards: result,
-        board: result.filter(board => board.user_id === this.state.user.id)[0]
-      }, callback);
+      if(result != null) {
+        this.setState({
+          boards: result,
+          board: result.filter(board => board.user_id === this.state.user.id)[0]
+        }, callback);
+      }
     })
   }
 

@@ -50,7 +50,7 @@ Knock.setup do |config|
   # config.token_public_key = nil
 
   ## Exception Class
-  ## ---------------
+  ## ---------------`
   ##
   ## Configure the exception to be used when user cannot be found.
   ##
@@ -59,23 +59,17 @@ Knock.setup do |config|
 end
 
 Knock::AuthTokenController.class_eval do
-  require 'pp'
-
   private
     def entity
       @entity ||=
         if entity_class.respond_to? :from_token_request
           entity_class.from_token_request request
         else
-          # entity_class.find_by username: auth_params[:username]
-          # puts "auth_params"
-          # pp auth_params.to_unsafe_h
           entity_class.find_by name: auth_params[:name]
         end
     end
 
     def auth_params
       params.require(:auth).permit :name, :password
-      # params.permit auth: [:username, :password]
     end
 end

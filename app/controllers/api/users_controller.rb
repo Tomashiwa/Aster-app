@@ -25,6 +25,13 @@ class Api::UsersController < ApiController
         @list2 = List.create(board_id: @board.id, name: "To-do");
         @list3 = List.create(board_id: @board.id, name: "In progress");
         @list4 = List.create(board_id: @board.id, name: "Completed");
+        @templateTask = Task.create(
+          list_id: @list1.id, 
+          title: "+ to start adding tasks!", 
+          description: "< > shifts the task over lists \n Pencil edits the task \n Bin to delete task", 
+          tag_id: 1, 
+          due_date: Time.now.strftime("%A, %d/%m/%Y, %I:%M %p"), 
+          participants: [@user.id])
         render :json => @user.to_json( :only => [:id, :name, :admin] ), status: :created
       else
         render json: @user.errors.to_json() , status: :unprocessable_entity
