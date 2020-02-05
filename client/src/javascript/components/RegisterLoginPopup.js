@@ -39,7 +39,15 @@ class RegisterLoginPopup extends React.Component {
             newPassword: ""
         })
     }
-
+    
+    handleKeyPress = (event) => {
+        if(event.key == "Enter") {
+            this.state.isRegistering 
+                ? this.handleRegister()
+                : this.handleLogin();
+        }
+    }
+ 
     render() {
         return (
             <Dialog open={this.props.isOpened} onClose={this.props.onClose}
@@ -78,7 +86,8 @@ class RegisterLoginPopup extends React.Component {
                         fullWidth
                         value={this.state.newPassword} 
                         inputProps={{ maxLength: 20 }}
-                        onChange={input => this.setState({newPassword: input.target.value})} 
+                        onChange={input => this.setState({newPassword: input.target.value})}
+                        onKeyPress={this.handleKeyPress} 
                     />                    
                 
                     <br /><br />

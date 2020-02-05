@@ -8,11 +8,10 @@ import "../../assets/stylesheets/SearchBar.css"
 class SearchBar extends React.Component {
     constructor(props) {
         super(props);
-        this.keyPress = this.keyPress.bind(this);
     }
 
-    keyPress(e){
-        if(e.keyCode === 13){
+    handleKeyPress = (event) => {
+        if(event.keyCode === 13){
            this.props.onSearch();
         }
     }  
@@ -24,7 +23,7 @@ class SearchBar extends React.Component {
                     placeholder="Search..."
                     inputProps={{ "aria-label": "search"}}
                     onChange={this.props.onTermChange}
-                    onKeyDown={this.keyPress}
+                    onKeyDown={this.handleKeyPress}
                 />
                 <IconButton onClick={this.props.onSearch}>
                     <SearchIcon />

@@ -19,6 +19,12 @@ class AddEditPopup extends React.Component {
       }
     }
 
+    handleKeyPress = (event) => {
+      if(event.key == "Enter") {
+        this.props.onAddTag();
+      }
+    }
+
     render() {
         return(
             <Dialog fullWidth={true} maxWidth={"sm"} open={this.props.isOpened} onClose={this.props.onClose} aria-labelledby="form-dialog-title"
@@ -68,6 +74,7 @@ class AddEditPopup extends React.Component {
                                   error={this.state.newTag.length <= 2}
                                   helperText={"Must be more than 2 characters."} 
                                   onChange={input => this.setState({newTag: input.target.value})}
+                                  onKeyPress={this.handleKeyPress}
                                 />
                                 {
                                   this.state.newTag.length <= 2
