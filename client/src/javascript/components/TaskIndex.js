@@ -316,7 +316,7 @@ class TaskIndex extends React.Component {
                   <ListItem className="taskItem" alignItems="flex-start" button={true} divider={true} onClick={() => this.onClickTask(task)}>
                     <ListItemText
                       style={{textAlign:"justify"}}
-                      primary={task.title}
+                      primary={<Box fontWeight="fontWeightBold"> {task.title} </Box>}
                       secondary={
                         <React.Fragment>
                           <Typography component={"span"} align="left" variant="subtitle2" className={this.state.classes.inline} color="textPrimary">
