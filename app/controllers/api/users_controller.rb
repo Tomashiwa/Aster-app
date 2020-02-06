@@ -1,6 +1,5 @@
 class Api::UsersController < ApiController
     require 'jwt'
-    require "pp"
     require 'json'
     before_action :set_user, only: [:show, :update, :destroy]
    
