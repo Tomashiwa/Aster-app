@@ -385,7 +385,6 @@ class TaskIndex extends React.Component {
                   isAdding={this.state.isAdding} 
                   onClose={this.handleClose}
                   tags={this.props.tags}
-                  newTagId={this.state.newTagId}
                   onNewTag={this.handleNewTag}
                   onDateChange={this.handleDateChange}
                   onTagChange={this.handleTagChange}

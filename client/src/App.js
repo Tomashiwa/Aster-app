@@ -158,7 +158,7 @@ class App extends React.Component {
       }
     })
     .then(async(response) => {
-      if(response.status == 401) {
+      if(response.status === 401) {
         localStorage.clear();
         this.setState({});
         return;

@@ -1,5 +1,5 @@
 import React from "react";
-import { List, ListItem, IconButton, Typography, Select, FormControl, MenuItem, InputLabel, Box, ListItemSecondaryAction } from "@material-ui/core";
+import { List, ListItem, IconButton, Typography, Select, FormControl, MenuItem, Box, ListItemSecondaryAction } from "@material-ui/core";
 
 import AddIcon from '@material-ui/icons/Add';
 import DoneIcon from '@material-ui/icons/Done';
@@ -8,7 +8,6 @@ import CloseIcon from '@material-ui/icons/Close';
 import UserInfo from "./UserInfo";
 
 import "../../assets/stylesheets/ParticipantList.css"
-// import "./styles/ParticipantList.css"
 
 class ParticipantList extends React.Component {
     constructor(props) {

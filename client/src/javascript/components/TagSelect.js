@@ -1,5 +1,5 @@
 import React from "react";
-import { Select, FormControl, MenuItem, InputLabel } from "@material-ui/core";
+import { Select, FormControl, MenuItem } from "@material-ui/core";
 
 class TagSelect extends React.Component {
     constructor(props) {

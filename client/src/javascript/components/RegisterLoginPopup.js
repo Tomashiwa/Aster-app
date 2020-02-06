@@ -1,8 +1,7 @@
 import React from "react";
-import { Button, Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions, TextField } from "@material-ui/core";
+import { Button, Dialog, DialogTitle, DialogContent, DialogContentText, TextField } from "@material-ui/core";
 
 import "../../assets/stylesheets/RegisterLoginPopup.css"
-// import "./styles/RegisterLoginPopup.css";
 
 class RegisterLoginPopup extends React.Component {
     constructor(props) {
@@ -41,7 +40,7 @@ class RegisterLoginPopup extends React.Component {
     }
     
     handleKeyPress = (event) => {
-        if(event.key == "Enter") {
+        if(event.key === "Enter") {
             this.state.isRegistering 
                 ? this.handleRegister()
                 : this.handleLogin();

@@ -185,9 +185,9 @@ class CommentSection extends React.Component {
                                     } />
 
                                     {
-                                        this.state.editingCommentID == comment.id
+                                        this.state.editingCommentID === comment.id
                                             ? <div>
-                                                <TextField className="field_editComment" autoFocus={true} fullWidth={true} value={this.state.editedComment} onChange={event => {this.setState({editedComment: event.target.value})}} multiline={true} size="small" fullWidth={true} variant="outlined" />
+                                                <TextField className="field_editComment" autoFocus={true} fullWidth={true} value={this.state.editedComment} onChange={event => {this.setState({editedComment: event.target.value})}} multiline={true} size="small" variant="outlined" />
                                                 <div className="saveCancelButtons">
                                                     <Button variant="outlined" onClick={this.handleSave}>
                                                         Save
