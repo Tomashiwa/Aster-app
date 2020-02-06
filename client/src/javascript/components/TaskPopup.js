@@ -6,7 +6,6 @@ import ParticipantList from "./ParticipantList";
 import CommentSection from "./CommentSection";
 
 import "../../assets/stylesheets/TaskPopup.css"
-// import "./styles/TaskPopup.css"
 
 class TaskPopup extends React.Component {
     constructor(props) {
@@ -84,10 +83,6 @@ class TaskPopup extends React.Component {
     }
 
     render() {
-        console.log("Current user id: " + this.props.user.id);
-        console.log("Task's owner id: " + this.props.selectedTask.participants[0]);
-        // console.log(this.props.selectedTask.participants);
-
         return(
             <Dialog id="popup" fullWidth={true} maxWidth={"md"} open={this.props.isOpened} onClose={this.props.onClose} 
                 PaperProps={{ style: {

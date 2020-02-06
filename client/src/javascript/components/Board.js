@@ -3,7 +3,6 @@ import React from "react";
 import TaskIndex from "./TaskIndex"
 
 import "../../assets/stylesheets/Board.css"
-// import "./styles/Board.css"
 
 class Board extends React.Component {
     constructor(props) {

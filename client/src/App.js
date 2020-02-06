@@ -5,11 +5,8 @@ import Navigator from "./javascript/components/Navigator";
 import Board from "./javascript/components/Board"
 
 import logo from './assets/images/logo.png';
-// import pinkVectorBG from './assets/images/pinkVectorBG.svg'
 
 import './assets/stylesheets/App.css'
-// import "./assets/stylesheets/App.css.erb"
-// import './assets/stylesheets/A'
 
 class App extends React.Component {
   constructor(props) {
@@ -49,8 +46,6 @@ class App extends React.Component {
 
   onLogin = (givenName, givenPassword, callback) => {
     const request = {"auth": {"name": givenName, "password": givenPassword}};
-    console.log("Request:");
-    console.log(request);
 
     const attemptLogin = async() => {
       fetch("/api/user_token", {
