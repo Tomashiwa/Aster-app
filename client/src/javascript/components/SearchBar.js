@@ -6,10 +6,6 @@ import SearchIcon from "@material-ui/icons/Search";
 import "../../assets/stylesheets/SearchBar.css"
 
 class SearchBar extends React.Component {
-    constructor(props) {
-        super(props);
-    }
-
     handleKeyPress = (event) => {
         if(event.keyCode === 13){
            this.props.onSearch();

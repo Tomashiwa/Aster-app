@@ -1,11 +1,7 @@
 import React from "react";
 import { Select, FormControl, MenuItem } from "@material-ui/core";
 
-class TagSelect extends React.Component {
-    constructor(props) {
-        super(props);
-    }
-    
+class TagSelect extends React.Component { 
     render() {
         return (
             <FormControl style={{display:'flex'}}>
