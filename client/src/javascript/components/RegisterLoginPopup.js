@@ -89,6 +89,7 @@ class RegisterLoginPopup extends React.Component {
                         // Display error messages based on previous submit (eg. wrong username or password)
                         helperText={this.props.errorMsg}
                         onChange={input => this.setState({newName: input.target.value})} 
+                        onKeyPress={this.handleKeyPress} 
                     />
                     <TextField 
                         id="field_password" 
