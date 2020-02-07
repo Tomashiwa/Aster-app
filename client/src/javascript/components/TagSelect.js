@@ -1,6 +1,14 @@
 import React from "react";
 import { Select, FormControl, MenuItem } from "@material-ui/core";
 
+/**
+ * A component that provide a list of Tags to be selected and returns the selected one
+ * 
+ * Props:
+ *    tags tag_id
+ *    
+ *    onChange
+ */
 class TagSelect extends React.Component { 
     render() {
         return (

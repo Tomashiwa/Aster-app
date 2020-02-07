@@ -1,6 +1,5 @@
 import React from "react";
-import { AppBar, Toolbar, IconButton } from "@material-ui/core";
-import { Typography } from "@material-ui/core";
+import { AppBar, Toolbar, IconButton, Typography } from "@material-ui/core";
 
 import UserInfo from "./UserInfo";
 import TagSelect from "./TagSelect";    
@@ -10,6 +9,17 @@ import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 
 import "../../assets/stylesheets/Navigator.css"
 
+/**
+ *  A component that serve as the nagivation bar of this app
+ *  Provides the user to log-out and filter their tasks
+ * 
+ *  Props:
+ *      tags
+ *      
+ *      user, filterTagId
+ * 
+ *      onLogout, onFilter, onSearch
+ */
 class Navigator extends React.Component {
     constructor(props) {
         super(props);

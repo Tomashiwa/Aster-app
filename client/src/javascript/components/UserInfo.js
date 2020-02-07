@@ -5,6 +5,12 @@ import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 
 import "../../assets/stylesheets/UserInfo.css"
 
+/**
+ * A component that display the current user's name and logo
+ * 
+ * Props:
+ *      user
+ */
 class UserInfo extends React.Component {
     render() {
         let UsernameComponent = this.props.user 

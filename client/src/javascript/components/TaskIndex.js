@@ -1,6 +1,6 @@
 import React from "react";
-import { IconButton, ListItemText, Typography, withStyles } from "@material-ui/core";
-import { List, ListItem, ListItemSecondaryAction, Box} from '@material-ui/core';
+import { IconButton, ListItemText, Typography, withStyles, List, 
+  ListItem, ListItemSecondaryAction, Box } from "@material-ui/core";
 import { makeStyles } from '@material-ui/core/styles';
 
 import AddIcon from '@material-ui/icons/Add';
@@ -14,28 +14,31 @@ import TaskPopup from "./TaskPopup";
 
 import "../../assets/stylesheets/TaskIndex.css"
 
+// Position a task's buttons with a height offset
 const styles = {
-  editDelete: {
+  taskButtons: {
     top: '90%'
-  },
-  dueDate: {
-    top: '10%'
   }
 };
 
+/**
+ * A component that display and manipulate tasks that are involved within this board's list
+ * 
+ * Props:
+ *    board_id
+ * 
+ *    users, tags, lists, taskks
+ * 
+ *    user, list, filterTagId
+ * 
+ *    fetchTasks, onUpdateTags
+ */
 class TaskIndex extends React.Component {
   constructor(props) {
     super(props);
-    
     this.state = {
       classes: makeStyles (theme => ({
-        root: {
-            width: '100%',
-            overflowX: 'auto',
-
-            maxWidth: 360,
-            backgroundColor: theme.palette.background.paper
-        }
+        root: {}
       })),
       isAdding: false, 
       isEditing: false, 
@@ -68,6 +71,7 @@ class TaskIndex extends React.Component {
     });
   };
 
+  // Submit a new task to the database
   handleSubmit = (newTitle, newDescription) => {
     let bearer = "Bearer " + localStorage.getItem("jwt");
 
@@ -99,6 +103,7 @@ class TaskIndex extends React.Component {
     this.handleClose();
   };
 
+  // Update a task in the database
   handleConfirm = (modifiedTitle, modifiedDescription) => event => {
     let bearer = "Bearer " + localStorage.getItem("jwt");
 
@@ -134,6 +139,7 @@ class TaskIndex extends React.Component {
     this.setState({isAdding: false, isEditing: false, isInspecting: false, isAddingTag: false});
   };
 
+  // Delete a task within the database
   handleDelete = task => {
     let bearer = "Bearer " + localStorage.getItem("jwt");
 
@@ -156,7 +162,9 @@ class TaskIndex extends React.Component {
     deleteTask();
   };
 
+  // Shift the task to the left list
   handleDemote = task => {
+    // Determine which List type it is (ie. Backlog, To-do, In progress, Completed) based on its id
     const listIndex = (this.props.board_id - 1) <= 0 
       ? this.props.list.id
       : parseInt(this.props.list.id) - (4 * (parseInt(this.props.board_id - 1)));
@@ -193,7 +201,9 @@ class TaskIndex extends React.Component {
     }
   }
 
+  // Shift a task to the right list
   handlePromote = task => {
+    // Determine which List type it is (ie. Backlog, To-do, In progress, Completed) based on its id
     const listIndex = (this.props.board_id - 1) <= 0 
       ? this.props.list.id
       : parseInt(this.props.list.id) - (4 * (parseInt(this.props.board_id - 1)));
@@ -242,6 +252,7 @@ class TaskIndex extends React.Component {
     this.setState({isAddingTag: true});
   };
 
+  // Add a new Tag to the database
   handleSubmitTag = () => {
     let bearer = "Bearer " + localStorage.getItem("jwt");
 
@@ -295,32 +306,41 @@ class TaskIndex extends React.Component {
   render() {
     const { classes } = this.props;
 
+    // Tasks sorted by earliest due date first
     let tasksLoaded = this.props.tasks;    
     tasksLoaded.sort((first, second) => {
       return first.due_date < second.due_date ? -1 : 1;
     });
 
     return (
+      // Container
       <Box id="index" border={0} borderColor="grey.500" borderRadius={16} boxShadow={5}>
           <br/>
+          {/* List's name */}
           <Typography id="indexTitle" align="center" variant="h6">{this.props.list.name}</Typography>
           <br/>
 
-          <List className={this.state.classes.root}>
+          <List>
             {
               tasksLoaded.map(task => (
                 <React.Fragment key={task.id}>
                   <ListItem className="taskItem" alignItems="flex-start" button={true} divider={true} onClick={() => this.onClickTask(task)}>
                     <ListItemText
                       style={{textAlign:"justify"}}
+                      // Title
                       primary={<Box fontWeight="fontWeightBold"> {task.title} </Box>}
                       secondary={
                         <React.Fragment>
-                          <Typography component={"span"} align="left" variant="subtitle2" className={this.state.classes.inline} color="textPrimary">
+                          {/* Tag */}
+                          <Typography component={"span"} align="left" variant="subtitle2" color="textPrimary">
                             {this.props.tags.length > 0 ? this.props.tags.filter(tag => tag.id === task.tag_id)[0].name : "Tags not loaded"}
                           </Typography>
+                          
                           <br />
-                          <Typography component={"span"} align="left" variant="subtitle1" className={this.state.classes.inline} color="textPrimary">
+                          
+                          {/* Due date */}
+                          <Typography component={"span"} align="left" variant="subtitle1" color="textPrimary">
+                            {/* Expand the date format */}
                             {"Due by: " + new Date(task.due_date).toLocaleDateString("en-GB", {
                               weekday: "short", 
                               year: "2-digit", 
@@ -330,7 +350,10 @@ class TaskIndex extends React.Component {
                               minute: "numeric", 
                               hour12: true})}
                           </Typography>
+
                           <br />
+                          
+                          {/* Body */}
                           <Typography component={"span"} style={{whiteSpace:"pre-line"}}>
                             {"\n" + task.description}
                           </Typography>
@@ -340,18 +363,23 @@ class TaskIndex extends React.Component {
                     />
 
                     {
+                      /**
+                       * Task Buttons
+                       * 
+                       * Avaliable to user that has admin right or own the Task
+                       *   */ 
                       this.props.user.admin || parseInt(this.props.user.id) === task.participants[0]
-                        ? <ListItemSecondaryAction classes={{ root: classes.editDelete }}>
-                            <IconButton size="small" onClick={() => this.handleDemote(task)} classes={{root: classes.taskButtons}}>
+                        ? <ListItemSecondaryAction classes={{ root: classes.taskButtons }}>
+                            <IconButton size="small" onClick={() => this.handleDemote(task)}>
                               <ChevronLeftIcon />
                             </IconButton>
-                            <IconButton size="small" onClick={() => this.handlePromote(task)} classes={{root: classes.taskButtons}}>
+                            <IconButton size="small" onClick={() => this.handlePromote(task)}>
                               <ChevronRightIcon />
                             </IconButton>
-                            <IconButton size="small" onClick={() => this.handleEdit(task)} classes={{ root: classes.taskButtons }}>
+                            <IconButton size="small" onClick={() => this.handleEdit(task)}>
                               <EditIcon />
                             </IconButton>
-                            <IconButton size="small" onClick={() => this.handleDelete(task)} classes={{ root: classes.taskButtons }}>
+                            <IconButton size="small" onClick={() => this.handleDelete(task)}>
                               <DeleteIcon />
                             </IconButton>
                           </ListItemSecondaryAction>
@@ -363,6 +391,7 @@ class TaskIndex extends React.Component {
               ))
             }
 
+            {/* Add Task */}
             <ListItem id="addTask_Item" key={this.props.tasks.length + 1} disableGutters={true}>
               <IconButton id="addTask_Icon" onClick={this.handleAdd}>
                 <AddIcon />
@@ -371,42 +400,46 @@ class TaskIndex extends React.Component {
           </List>
           <br></br>
 
+          {/* Form for adding & editing Task */}
           {
               (this.state.selectedTask && this.state.isEditing) || (this.state.isAdding)
-              ? <AddEditPopup selectedTask={this.state.selectedTask}
+              ? <AddEditPopup 
+                  selectedTask={this.state.selectedTask}
+                  tags={this.props.tags}
                   newTitle={this.state.newTitle}
                   newDescription={this.state.description}
                   newTagId={this.state.newTagId}
                   newDueDate={this.state.newDueDate}
                   isOpened={this.state.isAdding || this.state.isEditing} 
                   isAdding={this.state.isAdding} 
-                  onClose={this.handleClose}
-                  tags={this.props.tags}
+                  isAddingTag={this.state.isAddingTag}
                   onNewTag={this.handleNewTag}
                   onDateChange={this.handleDateChange}
                   onTagChange={this.handleTagChange}
-                  isAddingTag={this.state.isAddingTag}
                   onAddTag={this.handleSubmitTag}
                   onCancelTag={this.handleCancelTag}
+                  onClose={this.handleClose}
                   onSubmit={this.handleSubmit}
                   onConfirm={this.handleConfirm}/>
               : null
           }
 
+          {/* Form for inspecting Task */}
           {
             this.state.selectedTask
-              ? <TaskPopup selectedTask={this.state.selectedTask}
-                  user={this.props.user}
+              ? <TaskPopup 
                   users={this.props.users}
-                  newTagId={this.state.newTagId}
                   tags={this.props.tags}
+                  user={this.props.user}
+                  selectedTask={this.state.selectedTask}
+                  fetchTasks={this.props.fetchTasks}
+                  refreshSelected={this.refreshSelected}
+                  deleteSelf={() => this.handleDelete(this.state.selectedTask)} 
+                  newTagId={this.state.newTagId}
                   isOpened={this.state.isInspecting}
                   onTagChange={this.handleTagChange}
                   onConfirm={this.handleConfirm(this.state.title, this.state.description)}
-                  onClose={this.handleClose}
-                  fetchTasks={this.props.fetchTasks}
-                  refreshSelected={this.refreshSelected}
-                  deleteSelf={() => this.handleDelete(this.state.selectedTask)} />
+                  onClose={this.handleClose} />
               : null
           }
 

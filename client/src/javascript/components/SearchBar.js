@@ -5,6 +5,12 @@ import SearchIcon from "@material-ui/icons/Search";
 
 import "../../assets/stylesheets/SearchBar.css"
 
+/**
+ *  A component that provide a Textfield to capture the search term for filtering tasks
+ * 
+ *  Props:
+ *      onTermChange, onSearch
+ */
 class SearchBar extends React.Component {
     handleKeyPress = (event) => {
         if(event.keyCode === 13){

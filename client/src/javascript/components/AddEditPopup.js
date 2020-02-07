@@ -1,5 +1,6 @@
 import React from "react";
-import { Box, Button, Dialog, DialogTitle, DialogContent, DialogActions, TextField, IconButton } from "@material-ui/core";
+import { Box, Button, Dialog, DialogTitle, DialogContent, 
+         DialogActions, TextField, IconButton } from "@material-ui/core";
 import { MuiPickersUtilsProvider, KeyboardDateTimePicker } from '@material-ui/pickers';
 import DateFnsUtils from '@date-io/date-fns';
 
@@ -11,6 +12,19 @@ import TagSelect from "./TagSelect";
 
 import '../../assets/stylesheets/AddEditPopup.css'
 
+/**
+ *  A component that provide a form for adding and editing task
+ *  
+ *  Props:
+ *    selectedTask, tags
+ *    
+ *    newTitle, newDescription, newTagId, newDueDate
+ *    
+ *    isOpened, isAdding, isAddingTag
+ * 
+ *    onNewTag, onDataChange, onTagChange, onAddTag, onCancelTag,
+ *    onClose, onSubmit, onConfirm
+ */
 class AddEditPopup extends React.Component {
     constructor(props) {
       super(props);
@@ -19,6 +33,7 @@ class AddEditPopup extends React.Component {
       }
     }
 
+    // Capture pressing "enter" event
     handleKeyPress = (event) => {
       if(event.key === "Enter") {
         this.props.onAddTag();
@@ -27,17 +42,20 @@ class AddEditPopup extends React.Component {
 
     render() {
         return(
+            //Based on the boolean property, isAdding, elements within the dialogs will be swapped 
             <Dialog fullWidth={true} maxWidth={"sm"} open={this.props.isOpened} onClose={this.props.onClose} aria-labelledby="form-dialog-title"
                 PaperProps={{ style: {
                   backgroundImage: "linear-gradient(to bottom, #e2a3ad, #ffe4e1)"
               }}}
             >
+                {/* Form title */}
                 <DialogTitle id="addEdit_title">
                   {this.props.isAdding ? "Create new task" : "Edit task"}
                 </DialogTitle>
                 
                 <DialogContent>
                   <Box id="addEdit_content" borderRadius={8}>
+                    {/* New title */}
                     <TextField 
                       id="addEdit_titleField" 
                       autoFocus 
@@ -48,6 +66,7 @@ class AddEditPopup extends React.Component {
                       defaultValue={this.props.selectedTask ? this.props.selectedTask.title : this.props.newTitle}/>
 
                     <div id="addEdit_dateTags">
+                      {/* New due date */}
                       <MuiPickersUtilsProvider id="addEdit_date" utils={DateFnsUtils}>
                         <KeyboardDateTimePicker
                           required={true}
@@ -60,6 +79,11 @@ class AddEditPopup extends React.Component {
                         />
                       </MuiPickersUtilsProvider>
 
+                      {/** 
+                       * New tag
+                       * 
+                       * Render additional Textfield and buttons when user intend to create new tags
+                       * */}
                       {
                         this.props.isAddingTag
                           ? <div id="addEdit_tags_new">
@@ -97,6 +121,7 @@ class AddEditPopup extends React.Component {
                       }
                     </div>
                     
+                    {/* New description */}
                     <div id="addEdit_descriptionBox">
                       <TextField
                         id="addEdit_descriptionField" 
@@ -111,6 +136,7 @@ class AddEditPopup extends React.Component {
                   </Box>
                 </DialogContent>
 
+                {/* Different fetch events are submitted based on whether the component is adding or editing a task */}
                 <DialogActions id="addEdit_buttons">
                   {
                     this.props.isAdding

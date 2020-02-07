@@ -1,8 +1,19 @@
 import React from "react";
-import { Button, Dialog, DialogTitle, DialogContent, DialogContentText, TextField } from "@material-ui/core";
+import { Button, Dialog, DialogTitle, DialogContent, DialogContentText, 
+    TextField } from "@material-ui/core";
 
 import "../../assets/stylesheets/RegisterLoginPopup.css"
 
+/**
+ *  A component that provide a form for registering and logining
+ *  
+ *  Props:
+ *      isOpened
+ * 
+ *      errorMsg, resetErrorMsg
+ * 
+ *      onRegister, onLogin
+ */
 class RegisterLoginPopup extends React.Component {
     constructor(props) {
         super(props);
@@ -39,6 +50,7 @@ class RegisterLoginPopup extends React.Component {
         })
     }
     
+    // Capture pressing "enter" event
     handleKeyPress = (event) => {
         if(event.key === "Enter") {
             this.state.isRegistering 
@@ -49,6 +61,7 @@ class RegisterLoginPopup extends React.Component {
  
     render() {
         return (
+            // Based on the boolean property, isRegistering, elements within the dialog will be swapped 
             <Dialog open={this.props.isOpened} onClose={this.props.onClose}
                 PaperProps={{ style: {
                     backgroundImage: "linear-gradient(to bottom, #e2a3ad, #ffe4e1)"
@@ -73,6 +86,7 @@ class RegisterLoginPopup extends React.Component {
                         value={this.state.newName}
                         inputProps={{ maxLength: 16 }}
                         error={this.props.errorMsg !== ""}
+                        // Display error messages based on previous submit (eg. wrong username or password)
                         helperText={this.props.errorMsg}
                         onChange={input => this.setState({newName: input.target.value})} 
                     />

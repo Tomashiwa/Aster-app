@@ -1,5 +1,6 @@
 import React from "react";
-import { List, ListItem, IconButton, Typography, Select, FormControl, MenuItem, Box, ListItemSecondaryAction } from "@material-ui/core";
+import { List, ListItem, IconButton, Typography, Select, 
+    FormControl, MenuItem, Box, ListItemSecondaryAction } from "@material-ui/core";
 
 import AddIcon from '@material-ui/icons/Add';
 import DoneIcon from '@material-ui/icons/Done';
@@ -9,6 +10,16 @@ import UserInfo from "./UserInfo";
 
 import "../../assets/stylesheets/ParticipantList.css"
 
+/**
+ * A component that list down the participants that are involved in the selected task
+ * 
+ * Props:
+ *      users
+ * 
+ *      user, task
+ * 
+ *      onAdd, onDelete
+ */
 class ParticipantList extends React.Component {
     constructor(props) {
         super(props);
@@ -22,11 +33,14 @@ class ParticipantList extends React.Component {
     }
 
     componentDidMount() {
+        // Made a copy of participants to perform changes and filtering
         this.setState({participants: this.props.task.participants});
     }
 
     handleClick = () => {
-        const potentialParticipants = this.props.users.filter(user => {return (this.state.participants.filter(participant => {return parseInt(user.id) === participant}).length === 0 && !user.admin)});
+        // Only users that are not an admin or a participant of this task can be potential participants 
+        const potentialParticipants = this.props.users.filter(
+            user => {return (this.state.participants.filter(participant => {return parseInt(user.id) === participant}).length === 0 && !user.admin)});
 
         this.setState({
             isAdding: true, 
@@ -80,12 +94,21 @@ class ParticipantList extends React.Component {
                         this.state.participants.map((participant) => {
                         return (
                             <ListItem 
-                            key={participant} 
-                            divider={true} 
-                            disableGutters={true} 
-                            onMouseOver={() => this.handleEnterHover(participant)} 
-                            onMouseLeave={() => this.handleExitHover()}>
+                                key={participant} 
+                                divider={true} 
+                                disableGutters={true} 
+
+                                // Hover events toggle the remove button
+                                onMouseOver={() => this.handleEnterHover(participant)} 
+                                onMouseLeave={() => this.handleExitHover()}>
+                                
                                 <UserInfo user={this.props.users.filter(user => {return parseInt(user.id) === participant;})[0]} />
+                                
+                                {/**
+                                 * Render a button to remove this participant from the selected Task
+                                 *  
+                                 * A participant can only be removed if it is the user, user has admin right or is the owner of the task
+                                 * */ }
                                 {
                                     this.state.hovered === participant && (this.props.user.admin || parseInt(this.props.user.id) === this.state.participants[0] || parseInt(this.props.user.id) === participant)
                                     ? <ListItemSecondaryAction>
@@ -100,6 +123,7 @@ class ParticipantList extends React.Component {
                         })
                     }
 
+                    {/* Render elements for selecting a new participant for the Task  */}
                     {
                         this.state.isAdding && this.state.potentialParticipants.length >= 1
                             ? <ListItem id="addPart_item" key={this.props.users.length + 1} disableGutters={true}>

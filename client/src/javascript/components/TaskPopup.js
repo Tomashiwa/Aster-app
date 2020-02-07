@@ -7,6 +7,23 @@ import CommentSection from "./CommentSection";
 
 import "../../assets/stylesheets/TaskPopup.css"
 
+/**
+ * A component that provides the full details of the selected Task including
+ *      1. Basic information (eg. Title, Tags and Due-date)
+ *      2. Comments
+ *      3. Participants
+ * 
+ * Props:
+ *      users, tags
+ * 
+ *      user, selectedTask
+ * 
+ *      fetchTasks, refreshSelected, deleteSelf
+ * 
+ *      newTagId, isOpened
+ * 
+ *      onTagChange, onConfirm, onClose
+ */
 class TaskPopup extends React.Component {
     constructor(props) {
         super(props);
@@ -20,6 +37,7 @@ class TaskPopup extends React.Component {
         this.setState({hasChanged: true});
     }
 
+    // Add a new participant to this Task
     addParticipant = (userId, callback) => {
         let bearer = "Bearer " + localStorage.getItem("jwt");
 
@@ -41,6 +59,7 @@ class TaskPopup extends React.Component {
                 }})
             });
 
+            // Retrieve the task again to update the Task's information
             if(response.status === 200) {
                 this.props.fetchTasks(() => this.props.refreshSelected(this.props.selectedTask, callback));
             }
@@ -49,6 +68,7 @@ class TaskPopup extends React.Component {
         addParti();
     }
 
+    // Remove a participant from this Task
     deleteParticipant = (userId, callback) => {
         let bearer = "Bearer " + localStorage.getItem("jwt");
 
@@ -71,6 +91,7 @@ class TaskPopup extends React.Component {
                     }})
                 });
     
+                // Retrieve the task again to update the Task's information
                 if(response.status === 200) {
                     this.props.fetchTasks(() => this.props.refreshSelected(this.props.selectedTask, callback));
                 }
@@ -97,6 +118,7 @@ class TaskPopup extends React.Component {
                                 {this.props.selectedTask.title}
                             </div>
                             <div id="date">
+                                {/* Provide a more extended format of due-date */}
                                 {"Due by: " + new Date(this.props.selectedTask.due_date).toLocaleDateString("en-GB", {
                                     weekday: "short", 
                                     year: "numeric", 
@@ -109,7 +131,7 @@ class TaskPopup extends React.Component {
                         </div>
                         <div id="tags">
                             {
-                                
+                                // Only Task owner can modify the Task's tag
                                 this.props.user.id === this.props.selectedTask.participants[0]
                                     ? <TagSelect tags={this.props.tags} tag_id={this.props.newTagId} onChange={this.handleTagChange} />                    
                                     : <div> {this.props.tags[this.props.newTagId - 1].name} </div> 
@@ -130,13 +152,24 @@ class TaskPopup extends React.Component {
 
                     <div id="comments_tags_participants">
                         <div id="comments">
-                            <CommentSection user={this.props.user} users={this.props.users} tags={this.props.tags} task_id={this.props.selectedTask.id}/>
+                            <CommentSection 
+                                users={this.props.users} 
+                                tags={this.props.tags} 
+                                user={this.props.user} 
+                                task_id={this.props.selectedTask.id}/>
                         </div>
 
                         <div id="tags_participants">
                             <div id="participants">
-                                <ParticipantList task={this.props.selectedTask} user={this.props.user} users={this.props.users} onAdd={this.addParticipant} onDelete={this.deleteParticipant}/>                            </div>
+                                <ParticipantList 
+                                    users={this.props.users} 
+                                    user={this.props.user} 
+                                    task={this.props.selectedTask} 
+                                    onAdd={this.addParticipant} 
+                                    onDelete={this.deleteParticipant}/>                            
+                            </div>
                             <div id="confirmClose">
+                                {/* Save the changes for select a new Tag */}
                                 <Button variant="outlined" disabled={!this.state.hasChanged} onClick={this.props.onConfirm}>
                                     Confirm Changes
                                 </Button>

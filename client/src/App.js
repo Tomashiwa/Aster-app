@@ -261,23 +261,23 @@ class App extends React.Component {
                       id={this.state.board.id} 
                       tasks={this.state.tasks} 
                       lists={this.state.lists} 
-                      user={this.state.user} 
                       users={this.state.users} 
                       tags={this.state.tags} 
+                      user={this.state.user} 
                       filterTagId={this.state.filterTagId} 
                       filterSearchTerm={this.state.filterSearchTerm}
-                      onUpdateTags={this.fetchTags}
-                      fetchTasks={this.fetchTasks} /> 
+                      fetchTasks={this.fetchTasks}  
+                      onUpdateTags={this.fetchTags} />
                   : null
               }
             </div>
             
             <RegisterLoginPopup 
               isOpened={localStorage.getItem("jwt") === null}
-              onRegister={this.onRegister}
-              onLogin={this.onLogin}
               errorMsg={this.state.errorMsg}
               resetErrorMsg={() => this.setState({errorMsg: ""})}               
+              onRegister={this.onRegister}
+              onLogin={this.onLogin}
             />
           </div>
         : <div>LOADING...</div>

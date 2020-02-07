@@ -1,5 +1,6 @@
 import React from "react";
-import { List, ListItem, Button, Typography, ListItemText, IconButton, ListItemSecondaryAction, withStyles, TextField, Box } from "@material-ui/core";
+import { List, ListItem, Button, Typography, ListItemText, IconButton, 
+    ListItemSecondaryAction, withStyles, TextField, Box } from "@material-ui/core";
 
 import UserInfo from "./UserInfo";
 
@@ -8,6 +9,7 @@ import DeleteIcon from '@material-ui/icons/Delete';
 
 import "../../assets/stylesheets/CommentSection.css"
 
+// Positioning the comments and its buttons to provide gaps from other elements
 const styles = {
     editDelete: {
         top: "85%",
@@ -20,6 +22,14 @@ const styles = {
     }
 };
 
+/**
+ *  A component that render a list of Comments for a specific Task
+ * 
+ *  Props:
+ *      users, tags
+ * 
+ *      user, task_id
+ */
 class CommentSection extends React.Component {
     constructor(props) {
         super(props);
@@ -31,6 +41,7 @@ class CommentSection extends React.Component {
         }
     }
 
+    // Retrieve comments that belong to this Task, ordered by its ID
     fetchComments = () => {
         let bearer = "Bearer " + localStorage.getItem("jwt");
         
@@ -58,6 +69,7 @@ class CommentSection extends React.Component {
         this.fetchComments();
     }
 
+    // Add a new comment to the database
     handleAdd = () => {
         let bearer = "Bearer " + localStorage.getItem("jwt");
 
@@ -90,6 +102,7 @@ class CommentSection extends React.Component {
         this.setState({editingCommentID: comment.id, editedComment: comment.body});
     }
 
+    // Save the changes made to a comment
     handleSave = () => {
         let bearer = "Bearer " + localStorage.getItem("jwt");
 
@@ -122,6 +135,7 @@ class CommentSection extends React.Component {
         this.setState({editingCommentID: -1, editedComment: ""});
     }
 
+    // Erase deleted comment from the database
     handleDelete = comment => {
         let bearer = "Bearer " + localStorage.getItem("jwt");
 
@@ -162,6 +176,7 @@ class CommentSection extends React.Component {
                         {
                            this.state.comments.map(comment => (
                                 <ListItem className="comment" key={comment.id} divider={true} classes={{ root: classes.removePadding }}>
+                                    {/* Comment text */}
                                     <ListItemText
                                         style={{textAlign:"justify"}}
                                         primary={
@@ -183,6 +198,7 @@ class CommentSection extends React.Component {
                                             this.state.editingCommentID !== comment.id ? comment.body : null
                                     } />
 
+                                    {/* When the user is editing the comment, render a Textfield loaded with the comment and its buttons  */}
                                     {
                                         this.state.editingCommentID === comment.id
                                             ? <div>
@@ -199,6 +215,7 @@ class CommentSection extends React.Component {
                                             : null
                                     }
 
+                                    {/* Render edit & delete buttons if the comment is posted by the user or the user has admin right */}
                                     {
                                         this.props.user.admin || (parseInt(this.props.user.id) === comment.user_id && this.state.editingCommentID === -1)
                                             ? <ListItemSecondaryAction classes={{ root: classes.editDelete }}>
@@ -219,6 +236,7 @@ class CommentSection extends React.Component {
 
                 <br />
 
+                {/* Form for posting new comment */}
                 <div id="input">
                     <Typography variant="h6">
                         Post new comment:
