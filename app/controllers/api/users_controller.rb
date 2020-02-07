@@ -29,8 +29,8 @@ class Api::UsersController < ApiController
 
         @templateTask = Task.create(
           list_id: @list1.id, 
-          title: "+ to start adding tasks!", 
-          description: "< > shifts the task over lists \n Pencil edits the task \n Bin to delete task", 
+          title: "Press + to start adding tasks !", 
+          description: "'< >' shifts the task over lists \n 'Pencil' edits the task \n 'Bin' deletes the task", 
           tag_id: 1, 
           due_date: Time.now.strftime("%A, %d/%m/%Y, %I:%M %p"), 
           participants: [@user.id])
