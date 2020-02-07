@@ -1,6 +1,4 @@
-Rails.application.routes.draw do
-  # root to: "home#index"
-  
+Rails.application.routes.draw do  
   namespace :api do
     jsonapi_resources :tasks
     jsonapi_resources :tags
@@ -13,6 +11,4 @@ Rails.application.routes.draw do
   scope '/api' do
     post 'user_token' => 'user_token#create'
   end
-
-  # get "*path", to: "home#index", constraints: { format: "html" }
 end

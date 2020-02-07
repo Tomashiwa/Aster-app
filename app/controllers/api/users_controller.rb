@@ -19,11 +19,14 @@ class Api::UsersController < ApiController
       @user = User.new(user_params)
       
       if @user.save
+        # Create a set of default Board, Lists and Tasks for a new user
         @board = Board.create(user_id: @user.id, name: @user.name + "'s board");
+
         @list1 = List.create(board_id: @board.id, name: "Backlog");
         @list2 = List.create(board_id: @board.id, name: "To-do");
         @list3 = List.create(board_id: @board.id, name: "In progress");
         @list4 = List.create(board_id: @board.id, name: "Completed");
+
         @templateTask = Task.create(
           list_id: @list1.id, 
           title: "+ to start adding tasks!", 
@@ -31,6 +34,7 @@ class Api::UsersController < ApiController
           tag_id: 1, 
           due_date: Time.now.strftime("%A, %d/%m/%Y, %I:%M %p"), 
           participants: [@user.id])
+
         render :json => @user.to_json( :only => [:id, :name, :admin] ), status: :created
       else
         render json: @user.errors.to_json() , status: :unprocessable_entity

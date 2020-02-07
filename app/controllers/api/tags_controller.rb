@@ -7,7 +7,10 @@ class Api::TagsController < ApiController
         if current_user.admin?
             @tags = Tag.all
         else
+            # Only Tasks that user is a participant of
             @tasks = Task.where("?=ANY(participants)", current_user.id)
+            
+            # Only Tags that the user owns and @tasks uses
             @tags = Tag.where(:user_id => [current_user.id, nil]).or(Tag.where(:id => @tasks.pluck(:tag_id)));
         end
 

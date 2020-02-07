@@ -10,6 +10,7 @@ class Api::TasksController < ApiController
             @board = Board.where(:user_id => current_user.id).first
 
             if(@board != nil) 
+                # Only Tasks that user is a participant of
                 @tasks = Task.where("?=ANY(participants)", current_user.id)
             else
                 @tasks = []

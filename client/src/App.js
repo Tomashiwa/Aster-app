@@ -26,11 +26,13 @@ class App extends React.Component {
   }
 
   componentDidMount() {
+    // Auto-logout user if their user token expires
     if(localStorage.getItem("name") === null || localStorage.getItem("jwt") === null) {
       localStorage.clear();
       this.setState({});
     }
 
+    // Retrieve data of user that is still logged in
     if(localStorage.getItem("jwt") !== null) {
       this.fetchAll(localStorage.getItem("name"));
     }
@@ -44,6 +46,14 @@ class App extends React.Component {
     this.setState({filterSearchTerm: searchTerm});
   }
 
+  /**
+   * Login with the given account
+   * 
+   * Param:
+   *    givenName - Username
+   *    givenPassword - Password
+   *    callback - A function that will be called when login succeed
+   */
   onLogin = (givenName, givenPassword, callback) => {
     const request = {"auth": {"name": givenName, "password": givenPassword}};
 
@@ -73,6 +83,7 @@ class App extends React.Component {
     attemptLogin();
   }
 
+  // Reset the App's state when user logout 
   onLogout = () => {    
     localStorage.clear();
     this.setState({
@@ -85,6 +96,13 @@ class App extends React.Component {
     });
   }
 
+  /**
+   * Submit a new account onto the database
+   * Param:
+   *    givenName - Username
+   *    givenPassword - Password
+   *    callback - A function that will be called when the submit succeed
+   */
   onRegister = (givenName, givenPassword, callback) => {
     fetch("/api/users", {
       method: "POST",
@@ -112,6 +130,13 @@ class App extends React.Component {
     })
   }
 
+  /**
+   * Fetch the data sequentially
+   * 
+   * Param:
+   *    name - Name of the current user
+   */
+  // Fetch the data sequentially
   fetchAll = async(name) => {
     this.fetchUsers(name, 
       () => this.fetchBoards(
@@ -120,6 +145,13 @@ class App extends React.Component {
             () =>this.fetchTasks()))));
   }
 
+  /**
+   * Retrieve the users from the database
+   * 
+   * Param:
+   *    name - Name of the current user
+   *    callback - A function that will be called when retrieving succeed
+   * */ 
   fetchUsers = (name, callback) => {
     let bearer = "Bearer " + localStorage.getItem("jwt");
 
@@ -140,6 +172,12 @@ class App extends React.Component {
     })
   }
 
+  /**
+   *  Retrieve Boards from the database and locate the board owned by the user
+   * 
+   *  Param:
+   *    callback - A function that will be called when retrieving succeed
+   */
   fetchBoards = (callback) => {
     let bearer = "Bearer " + localStorage.getItem("jwt");
 
@@ -171,6 +209,12 @@ class App extends React.Component {
     })
   }
 
+  /**
+   *  Retrieve Lists from the database
+   * 
+   *  Param:
+   *    callback - A function that will be called when retrieving succeed
+   */
   fetchLists = (callback) => {
     let bearer = "Bearer " + localStorage.getItem("jwt");
 
@@ -191,6 +235,12 @@ class App extends React.Component {
     })
   }
 
+  /**
+   *  Retrieve Tags from the database
+   * 
+   *  Param:
+   *    callback - A function that will be called when retrieving succeed
+   */
   fetchTags = (callback) => {
     let bearer = "Bearer " + localStorage.getItem("jwt");
 
@@ -211,7 +261,13 @@ class App extends React.Component {
     })
   }
   
-  fetchTasks = callback => {
+  /**
+   *  Retrieve Tasks from the database
+   * 
+   *  Param:
+   *    callback - The function that will be called when retrieving succeed
+   */
+  fetchTasks = (callback) => {
     let bearer = "Bearer " + localStorage.getItem("jwt");
 
     fetch("/api/tasks", {
@@ -233,7 +289,6 @@ class App extends React.Component {
 
   render() {
     return (
-      //<div style={{backgroundImage: 'url('+pinkVectorBG+')'}}>
       this.state
         ? <div className="App"> 
             <img className="Logo" src={logo} alt="logo" width="250" height="90" />
@@ -284,10 +339,5 @@ class App extends React.Component {
     );
   }
 }
-
-  // <div>
-  //   {/* <img src={logo} alt="logo" /> */}
-  //   <img src={pinkVectorBG} alt="pinkBG" />
-  // </div>
 
 export default App;
