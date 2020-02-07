@@ -33,6 +33,7 @@
 
 #comments_tags_participants #comments {
     flex-grow: 1;
+    margin-right: 10px;
 }
 
 #comments_tags_participants #tags_participants {
@@ -64,8 +65,10 @@
     display: flex;
     flex-direction: column;
     justify-content: stretch;
+    /* background-color: seagreen; */
 }
 
-@media screen and (max-width: 700px) {
-
+#confirmClose > #confirmClose_confirm {
+    margin-bottom: 8px;
+    /* background-color: snow; */
 }

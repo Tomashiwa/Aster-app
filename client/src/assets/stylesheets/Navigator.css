@@ -1,9 +1,9 @@
-#navBar {
+#navigator_bar {
     background-image: linear-gradient(to bottom right, rgb(235, 144, 159), mistyRose);
     display: flex;
 }
 
-#searchFilter {
+#navigator_searchFilter {
     display: flex;
     justify-content: space-between;
     align-items: center;

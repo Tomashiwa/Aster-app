@@ -176,10 +176,9 @@ class TaskPopup extends React.Component {
                             </div>
                             <div id="confirmClose">
                                 {/* Save the changes for select a new Tag */}
-                                <Button variant="outlined" disabled={!this.state.hasChanged} onClick={this.handleConfirmChange}>
+                                <Button id="confirmClose_confirm" variant="outlined" disabled={!this.state.hasChanged} onClick={this.handleConfirmChange}>
                                     Confirm Changes
                                 </Button>
-                                <br></br>
                                 <Button variant="outlined" onClick={this.props.onClose}>
                                     Close
                                 </Button>

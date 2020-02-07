@@ -163,7 +163,7 @@ class CommentSection extends React.Component {
 
         return (
             <div>
-                <div id="title">
+                <div id="commentSection_title">
                     <Typography id="titleText" variant="h6">
                         Comments
                     </Typography>
@@ -171,7 +171,7 @@ class CommentSection extends React.Component {
 
                 <br />
 
-                <Box id="commentBox" borderRadius={8} style={{maxWidth: "700px"}}>
+                <Box id="commentSection_box" borderRadius={8} style={{maxWidth: "700px"}}>
                     <List>
                         {
                            this.state.comments.map(comment => (
@@ -180,7 +180,7 @@ class CommentSection extends React.Component {
                                     <ListItemText
                                         style={{textAlign:"justify"}}
                                         primary={
-                                            <div className="userDate">
+                                            <div className="comment_userDate">
                                                 <UserInfo user={this.props.users[comment.user_id - 1]} textVariant="h6"/>
                                                 <Typography> 
                                                     {new Date(comment.updated_at).toLocaleDateString("en-GB", {
@@ -202,8 +202,8 @@ class CommentSection extends React.Component {
                                     {
                                         this.state.editingCommentID === comment.id
                                             ? <div>
-                                                <TextField className="field_editComment" autoFocus={true} fullWidth={true} value={this.state.editedComment} onChange={event => {this.setState({editedComment: event.target.value})}} multiline={true} size="small" variant="outlined" />
-                                                <div className="saveCancelButtons">
+                                                <TextField className="comment_editField" autoFocus={true} fullWidth={true} value={this.state.editedComment} onChange={event => {this.setState({editedComment: event.target.value})}} multiline={true} size="small" variant="outlined" />
+                                                <div className="comment_saveCancel">
                                                     <Button variant="outlined" onClick={this.handleSave}>
                                                         Save
                                                     </Button>
@@ -237,15 +237,13 @@ class CommentSection extends React.Component {
                 <br />
 
                 {/* Form for posting new comment */}
-                <div id="input">
+                <div id="commentSection_input">
                     <Typography variant="h6">
                         Post new comment:
                     </Typography>
-
-                    <br/>
                     
                     <TextField 
-                        id="field_newComment" 
+                        id="commentSection_newField" 
                         multiline
                         fullWidth 
                         size="small" 
@@ -255,7 +253,7 @@ class CommentSection extends React.Component {
                         onChange={event => {this.setState({newComment: event.target.value})}} 
                     />
                     
-                    <div id="submitButton">
+                    <div id="commentSection_submitButton">
                         <Button variant="outlined" onClick={this.handleAdd}>
                             Submit
                         </Button>

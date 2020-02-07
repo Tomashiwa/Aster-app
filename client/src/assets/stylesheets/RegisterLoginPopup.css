@@ -1,8 +1,8 @@
-.buttonArea {
+.registerLoginPopup_buttonArea {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
 }
 
-.buttonArea > Button {
+.registerLoginPopup_buttonArea > Button {
 }

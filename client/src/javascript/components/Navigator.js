@@ -34,15 +34,15 @@ class Navigator extends React.Component {
 
     render() {
         return( 
-            <AppBar id="navBar" position="static">
+            <AppBar id="navigator_bar" position="static">
                 <Toolbar>
                     <UserInfo user={this.props.user} textVariant="h6"/>
 
-                    <IconButton id="logOut" onClick={this.props.onLogout} disableRipple={true}>
+                    <IconButton id="navigator_logOut" onClick={this.props.onLogout} disableRipple={true}>
                         <ExitToAppIcon />
                     </IconButton>
 
-                    <div id="searchFilter">
+                    <div id="navigator_searchFilter">
                         <Typography> Filter by </Typography>
                         <div style={{marginLeft: "10px", marginRight: "15px"}}>
                             <TagSelect tags={this.props.tags} tag_id={this.props.filterTagId} onChange={this.props.onFilter} />

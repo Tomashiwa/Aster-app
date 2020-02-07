@@ -82,13 +82,13 @@ class ParticipantList extends React.Component {
     render() {
         return (
             <div>
-                <Typography id="title" variant="h6">
+                <Typography id="participantListTitle" variant="h6">
                     Participants
                 </Typography>
 
-                <br />
+                {/* <br /> */}
 
-                <Box id="listBox" borderRadius={8}>
+                <Box id="ParticipantListBox" borderRadius={8}>
                     <List dense={true} disablePadding={true}>
                     {
                         this.state.participants.map((participant) => {

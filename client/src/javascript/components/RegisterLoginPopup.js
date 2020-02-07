@@ -107,7 +107,7 @@ class RegisterLoginPopup extends React.Component {
                     <br /><br />
 
                     {
-                        <div className="buttonArea">
+                        <div className="registerLoginPopup_buttonArea">
                             <Button variant="outlined" onClick={this.state.isRegistering ? this.handleRegister : this.handleLogin}>
                                 {this.state.isRegistering ? "Confirm" : "Login"}
                             </Button>

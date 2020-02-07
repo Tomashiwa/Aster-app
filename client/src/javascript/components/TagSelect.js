@@ -20,10 +20,11 @@ class TagSelect extends React.Component {
                 onChange={this.props.onChange}
                 required={true}
                 autoWidth={true}
+                
               >
                 {
                   this.props.tags.map(tag => 
-                    <MenuItem key={tag.id} value={tag.id}>{tag.name}</MenuItem>
+                    <MenuItem key={tag.id} value={tag.id} styles={{ ListItem: {alignItems: 'center'}}}>{tag.name}</MenuItem>
                   )
                 }
               </Select>

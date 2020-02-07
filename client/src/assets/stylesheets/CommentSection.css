@@ -1,24 +1,24 @@
-.userDate {
+.comment_userDate {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-content: center;
 }
 
-#title {
+#commentSection_title {
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
     align-content: center;
 }
 
-#title > #titleText {
+#commentSection_title > #titleText {
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-#commentBox {
+#commentSection_box {
     background-image: linear-gradient(0deg, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0.3) 100%);    
 }
 
@@ -27,20 +27,21 @@
     flex-direction: column;
 }
 
-.comment .saveCancelButtons {
+.comment .comment_saveCancel {
     display: flex;
     flex-direction: row;
     justify-content: flex-end;
     margin-top: 5px;
 }
 
-#input {
+#commentSection_input {
+    margin-top: 7px;
     max-width: 700px;
 }
 
-#input > #submitButton {
+#commentSection_input > #commentSection_submitButton {
     display: flex;
-    flex-direction: row;
+    flex-direction: row-reverse;
     justify-content: flex-end;
     margin-top: 5px;
 }
