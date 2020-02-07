@@ -37,6 +37,11 @@ class TaskPopup extends React.Component {
         this.setState({hasChanged: true});
     }
 
+    handleConfirmChange = () => {
+        this.props.onConfirm();
+        this.setState({hasChanged: false});
+    }
+
     // Add a new participant to this Task
     addParticipant = (userId, callback) => {
         let bearer = "Bearer " + localStorage.getItem("jwt");
@@ -171,7 +176,7 @@ class TaskPopup extends React.Component {
                             </div>
                             <div id="confirmClose">
                                 {/* Save the changes for select a new Tag */}
-                                <Button variant="outlined" disabled={!this.state.hasChanged} onClick={this.props.onConfirm}>
+                                <Button variant="outlined" disabled={!this.state.hasChanged} onClick={this.handleConfirmChange}>
                                     Confirm Changes
                                 </Button>
                                 <br></br>
