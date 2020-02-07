@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Dialog, DialogTitle, DialogContent, DialogContentText, Box } from "@material-ui/core";
+import { Button, Dialog, DialogTitle, DialogContent, DialogContentText, Box, Typography } from "@material-ui/core";
 
 import TagSelect from "./TagSelect";
 import ParticipantList from "./ParticipantList";
@@ -112,32 +112,22 @@ class TaskPopup extends React.Component {
                 }}}
             >
                 <DialogTitle>
-                    <Box id="titleDateTagsBox" borderRadius={8}>
-                        <div id="titleDate">
-                            <div id="title">
-                                {this.props.selectedTask.title}
-                            </div>
-                            <div id="date">
-                                {/* Provide a more extended format of due-date */}
-                                {"Due by: " + new Date(this.props.selectedTask.due_date).toLocaleDateString("en-GB", {
-                                    weekday: "short", 
-                                    year: "numeric", 
-                                    month: "short", 
-                                    day: "numeric", 
-                                    hour: "numeric", 
-                                    minute: "numeric", 
-                                    hour12: true})}
-                            </div>
+                    <Box id="titleDateBox" borderRadius={8}>
+                        <div id="title">
+                            {this.props.selectedTask.title}
                         </div>
-                        <div id="tags">
-                            {
-                                // Only Task owner can modify the Task's tag
-                                this.props.user.id === this.props.selectedTask.participants[0]
-                                    ? <TagSelect tags={this.props.tags} tag_id={this.props.newTagId} onChange={this.handleTagChange} />                    
-                                    : <div> {this.props.tags[this.props.newTagId - 1].name} </div> 
-                            }
 
-                        </div>
+                        <div id="date">
+                            {/* Provide a more extended format of due-date */}
+                            { new Date(this.props.selectedTask.due_date).toLocaleDateString("en-GB", {
+                                weekday: "short", 
+                                year: "numeric", 
+                                month: "short", 
+                                day: "numeric", 
+                                hour: "numeric", 
+                                minute: "numeric", 
+                                hour12: true})}
+                        </div>                        
                     </Box>
                 </DialogTitle>
 
@@ -160,6 +150,17 @@ class TaskPopup extends React.Component {
                         </div>
 
                         <div id="tags_participants">
+                            <Typography variant="h6">
+                                Tags
+                            </Typography>
+                            <Box id="tags" borderRadius={8}>
+                                {
+                                    // Only Task owner can modify the Task's tag
+                                    this.props.user.id === this.props.selectedTask.participants[0]
+                                        ? <TagSelect tags={this.props.tags} tag_id={this.props.newTagId} onChange={this.handleTagChange} />                    
+                                        : <div> {this.props.tags[this.props.newTagId - 1].name} </div> 
+                                }
+                            </Box>
                             <div id="participants">
                                 <ParticipantList 
                                     users={this.props.users} 
