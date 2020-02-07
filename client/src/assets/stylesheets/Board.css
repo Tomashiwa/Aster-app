@@ -8,7 +8,6 @@ section article:first-child {
     flex-grow: 1;
     flex-basis: 0;
     max-width: 25%;
-    /* margin-right: 5px; */
 }
 
 section article {
@@ -23,5 +22,4 @@ section article:last-child {
     flex-grow: 1;
     flex-basis: 0;
     max-width: 25%;
-    /* margin-left: 5px; */
 }
