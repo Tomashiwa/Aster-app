@@ -38,7 +38,7 @@ class Navigator extends React.Component {
                 <Toolbar>
                     <UserInfo user={this.props.user} textVariant="h6"/>
 
-                    <IconButton id="logOut" onClick={this.props.onLogout}>
+                    <IconButton id="logOut" onClick={this.props.onLogout} disableRipple={true}>
                         <ExitToAppIcon />
                     </IconButton>
 

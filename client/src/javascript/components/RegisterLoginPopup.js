@@ -55,7 +55,7 @@ class RegisterLoginPopup extends React.Component {
         if(event.key === "Enter") {
             this.state.isRegistering 
                 ? this.handleRegister()
-                : this.handleLogin();
+                : this.handleLogin();                
         }
     }
  
@@ -106,23 +106,14 @@ class RegisterLoginPopup extends React.Component {
                     <br /><br />
 
                     {
-                        this.state.isRegistering
-                            ? <div className="buttonArea">
-                                <Button variant="outlined" onClick={this.handleRegister}>
-                                    Confirm
-                                </Button>
-                                <Button variant="outlined" onClick={this.handleSwitch}>
-                                    Sign in
-                                </Button>                                    
-                            </div>
-                            : <div className="buttonArea">
-                                <Button variant="outlined" onClick={this.handleLogin}>
-                                    Login
-                                </Button>
-                                <Button variant="outlined" onClick={this.handleSwitch}>
-                                    Sign up
-                                </Button>                                    
-                            </div>
+                        <div className="buttonArea">
+                            <Button variant="outlined" onClick={this.state.isRegistering ? this.handleRegister : this.handleLogin}>
+                                {this.state.isRegistering ? "Confirm" : "Login"}
+                            </Button>
+                            <Button variant="outlined" onClick={this.handleSwitch}>
+                                {this.state.isRegistering ? "Sign in" : "Sign up"}
+                            </Button>                            
+                        </div>
                     }
                 </DialogContent>
             </Dialog>
